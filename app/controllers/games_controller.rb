@@ -10,8 +10,12 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = @category.game.find(params[:id])
-    render json: { category: @category, game: @game }
+    @games = @category.games.find(params[:id])
+
+    respond_to do |f|
+      f.html
+      f.json {render json:{ category: @category, games: @games }}
+    end
   end
 
   def create
@@ -25,7 +29,7 @@ class GamesController < ApplicationController
 
   def update
     @game = @category.game.find(params[:id])
-      if @category.game(.update(game_params))
+      if @category.game.update(game_params)
       render json: {category: @category, games: @games}
     else
       render json: {errors:@game.errors}
@@ -37,7 +41,7 @@ class GamesController < ApplicationController
     if @game.destroy
       render json: {game: nil}
     else
-      render json: {errors@game.errors}
+      render json: {errors: @game.errors}
     end
   end
 
