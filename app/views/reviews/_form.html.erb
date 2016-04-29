@@ -1,0 +1,14 @@
+<%=@review do |f|%>
+
+       <%= f.label :title %>
+       <%= f.text_field :title, class: "form-control", placeholder: ". . ." %>
+
+       <%= f.label :description %>
+       <%= f.text_field :description, class: "form-control", placeholder: ". . ."   %>
+
+       <%= f.label :rating %>
+       <%= f.text_area :rating, class: "form-control", rows: 10  %>
+
+    <%= f.submit (@review.new_record? ? "Create" : "Update"), class: "form-control btn-primary" %>
+
+<% end %>

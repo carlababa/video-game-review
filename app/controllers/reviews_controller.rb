@@ -19,6 +19,20 @@ class ReviewsController < ApplicationController
  end
 
 
+ def new
+
+ end
+
+ def create
+   @review = Review.new
+
+   if @review.save
+   render json: { task:@review, location: review_url(@review)}, status: 201 #created
+   else
+     render json: { errors: @review.errors }, status: 422 #unprocessable entity
+   end
+ end
+
 
   protected
 
