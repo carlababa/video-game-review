@@ -1,22 +1,24 @@
 class GamesController < ApplicationController
   before_filter :set_category
+
   def index
     @games = @category.games
-
     respond_to do |f|
       f.html
       f.json {render json:{ category: @category, games: @games }}
     end
   end
+
 
   def show
-    @games = @category.games.find(params[:id])
+    @game = @category.games.find(params[:id])
 
     respond_to do |f|
       f.html
-      f.json {render json:{ category: @category, games: @games }}
+      f.json {render json:{ category: @category, game: @game }}
     end
   end
+
 
   def create
     @game = Game.new
